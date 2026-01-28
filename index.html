@@ -87,6 +87,19 @@
       border-radius: 5px;
       transition: width 0.4s ease;
     }
+    .reset-btn {
+      margin-top: 16px;
+      padding: 8px 16px;
+      background-color: #e53935;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+    .reset-btn:hover {
+      background-color: #c62828;
+    }
   </style>
 </head>
 <body>
@@ -113,11 +126,11 @@
     </div>
   </div>
 
-  <div class="result" id="result">
-    Click an option above to record your temperature check.
-  </div>
-
   <div class="stats" id="stats"></div>
+
+  <button class="reset-btn" onclick="resetVotes()">
+    Reset all votes
+  </button>
 
   <script>
     const keys = ["crisis", "highly-stressed", "concerned", "neutral", "very-good", "thriving"];
@@ -192,6 +205,15 @@
       document.getElementById("result").innerHTML =
         `You voted: <strong>${labels[value]}</strong>`;
       updateStats();
+    }
+
+    function resetVotes() {
+      if (confirm("Are you sure you want to reset all votes?")) {
+        localStorage.removeItem("temperatureVotes");
+        document.getElementById("result").innerHTML =
+          "All votes have been reset. You can vote again.";
+        updateStats();
+      }
     }
 
     // Init on page load
