@@ -152,9 +152,12 @@
       return {};
     }
   }
-
   async function saveVote(value) {
-    await fetch(`${API_URL}/vote?value=${value}`, {method: "POST"});
+  await fetch(`${API_URL}/vote`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ value })
+  });
   }
 
   async function updateStats() {
